@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --cor-primaria: #f97ebd;
+            --cor-secundaria: #2b2b28;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+        }
+
+        h1 {
+            color: var(--cor-secundaria);
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--cor-primaria);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--cor-secundaria);
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--cor-primaria);
+        }
+
+        input.erro {
+            border-color: #ff3860;
+        }
+
+        .mensagem-erro {
+            color: #ff3860;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .requisitos-senha {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .requisitos-senha p {
+            margin-bottom: 5px;
+            color: var(--cor-secundaria);
+        }
+
+        .requisitos-senha .requisito {
+            display: flex;
+            align-items: center;
+            margin: 3px 0;
+        }
+
+        .requisitos-senha .requisito span {
+            width: 15px;
+            height: 15px;
+            margin-right: 10px;
+            display: inline-block;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+
+        .requisitos-senha .requisito.valido span {
+            background-color: #23d160;
+        }
+
+        button {
+            background-color: var(--cor-primaria);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e46ea7;
+        }
+
+        .sucesso {
+            background-color: #23d160;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .checkbox-container a {
+            color: var(--cor-primaria);
+            text-decoration: none;
+        }
+
+        .checkbox-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cadastre-se</h1>
+        <form id="form-cadastro">
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" placeholder="Digite seu nome completo">
+                <div class="mensagem-erro" id="erro-nome">O nome é obrigatório</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="exemplo@email.com">
+                <div class="mensagem-erro" id="erro-email">Digite um e-mail válido</div>
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" placeholder="000.000.000-00">
+                <div class="mensagem-erro" id="erro-cpf">Digite um CPF válido</div>
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" placeholder="(00) 00000-0000">
+                <div class="mensagem-erro" id="erro-telefone">Digite um telefone válido</div>
+            </div>
+
+            <div class="form-group">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" placeholder="00000-000">
+                <div class="mensagem-erro" id="erro-cep">Digite um CEP válido</div>
+            </div>
+
+            <div class="form-group">
+                <label for="rua">Rua</label>
+                <input type="text" id="rua" placeholder="Digite sua rua">
+            </div>
+
+            <div class="form-group">
+                <label for="bairro">Bairro</label>
+                <input type="text" id="bairro" placeholder="Digite seu bairro">
+            </div>
+
+            <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" placeholder="Digite sua cidade">
+            </div>
+
+            <div class="form-group">
+                <label for="uf">Estado</label>
+                <input type="text" id="uf" placeholder="Digite seu estado">
+            </div>
+
+
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" placeholder="Crie sua senha">
+                <div class="mensagem-erro" id="erro-senha">A senha não atende aos requisitos</div>
+
+                <div class="requisitos-senha">
+                    <p>Sua senha deve conter:</p>
+                    <div class="requisito" id="req-tamanho"><span></span>Pelo menos 8 caracteres</div>
+                    <div class="requisito" id="req-maiuscula"><span></span>Pelo menos 1 letra maiúscula</div>
+                    <div class="requisito" id="req-minuscula"><span></span>Pelo menos 1 letra minúscula</div>
+                    <div class="requisito" id="req-numero"><span></span>Pelo menos 1 número</div>
+                    <div class="requisito" id="req-simbolo"><span></span>Pelo menos 1 símbolo</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmar-senha">Confirmar Senha</label>
+                <input type="password" id="confirmar-senha" placeholder="Confirme sua senha">
+                <div class="mensagem-erro" id="erro-confirmar-senha">As senhas não coincidem</div>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="termos">
+                <label for="termos">Concordo com os <a href="#">Termos de Serviço</a> e <a href="#">Política de
+                        Privacidade</a></label>
+                <div class="mensagem-erro" id="erro-termos">Você precisa aceitar os termos para continuar</div>
+            </div>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <div class="sucesso" id="mensagem-sucesso">
+            Cadastro realizado com sucesso!
+        </div>
+    </div>
+
+    <script>
+        // Máscara para CPF
+        document.getElementById('cpf').addEventListener('input', function (e) {
+            let valor = e.target.value.replace(/\D/g, '');
+            if (valor.length > 11) valor = valor.substring(0, 11);
+
+            // Formata o CPF
+            if (valor.length > 0) {
+                valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+                valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+                valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            }
+
+            e.target.value = valor;
+        });
+
+        // Função para validar CPF
+        function validarCPF(cpf) {
+            cpf = cpf.replace(/[^\d]+/g, '');
+            if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+
+            // Validação do primeiro dígito
+            let soma = 0;
+            for (let i = 0; i < 9; i++) {
+                soma += parseInt(cpf.charAt(i)) * (10 - i);
+            }
+            let resto = 11 - (soma % 11);
+            let dv1 = resto > 9 ? 0 : resto;
+
+            // Validação do segundo dígito
+            soma = 0;
+            for (let i = 0; i < 10; i++) {
+                soma += parseInt(cpf.charAt(i)) * (11 - i);
+            }
+            resto = 11 - (soma % 11);
+            let dv2 = resto > 9 ? 0 : resto;
+
+            return parseInt(cpf.charAt(9)) === dv1 && parseInt(cpf.charAt(10)) === dv2;
+        }
+
+        // Máscaras para os campos
+        document.getElementById('telefone').addEventListener('input', function (e) {
+            let valor = e.target.value.replace(/\D/g, '');
+            if (valor.length > 11) valor = valor.substring(0, 11);
+
+            // Formata o número do telefone
+            if (valor.length > 0) {
+                valor = '(' + valor;
+                if (valor.length > 3) {
+                    valor = valor.substring(0, 3) + ') ' + valor.substring(3);
+                }
+                if (valor.length > 10) {
+                    valor = valor.substring(0, 10) + '-' + valor.substring(10);
+                }
+            }
+
+            e.target.value = valor;
+        });
+
+        // Máscara para CEP e busca automatizada
+        document.getElementById('cep').addEventListener('input', function (e) {
+            let valor = e.target.value.replace(/\D/g, '');
+            if (valor.length > 8) valor = valor.substring(0, 8);
+
+            // Formata o CEP
+            if (valor.length > 5) {
+                valor = valor.substring(0, 5) + '-' + valor.substring(5);
+            }
+
+            e.target.value = valor;
+
+            // Verificar se o CEP está completo (8 dígitos)
+            if (valor.length === 9) {
+                pesquisacep(valor);
+            }
+        });
+
+        // Validação da senha em tempo real
+        document.getElementById('senha').addEventListener('input', function (e) {
+            const senha = e.target.value;
+
+            // Verificar cada requisito
+            const temTamanhoMinimo = senha.length >= 8;
+            const temMaiuscula = /[A-Z]/.test(senha);
+            const temMinuscula = /[a-z]/.test(senha);
+            const temNumero = /[0-9]/.test(senha);
+            const temSimbolo = /[^A-Za-z0-9]/.test(senha);
+
+            // Atualizar os indicadores visuais
+            atualizarRequisito('req-tamanho', temTamanhoMinimo);
+            atualizarRequisito('req-maiuscula', temMaiuscula);
+            atualizarRequisito('req-minuscula', temMinuscula);
+            atualizarRequisito('req-numero', temNumero);
+            atualizarRequisito('req-simbolo', temSimbolo);
+        });
+
+        function atualizarRequisito(id, valido) {
+            const elemento = document.getElementById(id);
+            if (valido) {
+                elemento.classList.add('valido');
+            } else {
+                elemento.classList.remove('valido');
+            }
+        }
+
+        // Validação do formulário ao enviar
+        document.getElementById('form-cadastro').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let formValido = true;
+
+            // Validar campos obrigatórios
+            const campos = ['nome', 'email', 'telefone', 'cep', 'cpf', 'senha', 'confirmar-senha'];
+
+            campos.forEach(campo => {
+                const elemento = document.getElementById(campo);
+                const mensagemErro = document.getElementById('erro-' + campo);
+
+                if (!elemento.value.trim()) {
+                    mostrarErro(elemento, mensagemErro);
+                    formValido = false;
+                } else {
+                    ocultarErro(elemento, mensagemErro);
+                }
+            });
+
+            // Validar formato do email
+            const email = document.getElementById('email');
+            const erroEmail = document.getElementById('erro-email');
+            if (email.value && !validarEmail(email.value)) {
+                mostrarErro(email, erroEmail);
+                formValido = false;
+            }
+
+            // Validar CPF
+            const cpf = document.getElementById('cpf');
+            const erroCpf = document.getElementById('erro-cpf');
+            if (cpf.value && !validarCPF(cpf.value)) {
+                mostrarErro(cpf, erroCpf);
+                formValido = false;
+            }
+
+            // Validar senha
+            const senha = document.getElementById('senha').value;
+            const erroSenha = document.getElementById('erro-senha');
+            const senhaValida = validarSenha(senha);
+
+            if (!senhaValida) {
+                mostrarErro(document.getElementById('senha'), erroSenha);
+                formValido = false;
+            }
+
+            // Validar confirmação de senha
+            const confirmarSenha = document.getElementById('confirmar-senha');
+            const erroConfirmarSenha = document.getElementById('erro-confirmar-senha');
+
+            if (senha !== confirmarSenha.value) {
+                mostrarErro(confirmarSenha, erroConfirmarSenha);
+                formValido = false;
+            }
+
+            // Validar aceitação dos termos
+            const termos = document.getElementById('termos');
+            if (!termos.checked) {
+                document.getElementById('erro-termos').style.display = 'block';
+                formValido = false;
+            } else {
+                document.getElementById('erro-termos').style.display = 'none';
+            }
+
+            // Se o formulário for válido, exibe mensagem de sucesso
+            if (formValido) {
+                document.getElementById('form-cadastro').style.display = 'none';
+                document.getElementById('mensagem-sucesso').style.display = 'block';
+            }
+        });
+
+        function mostrarErro(elemento, mensagemErro) {
+            elemento.classList.add('erro');
+            mensagemErro.style.display = 'block';
+        }
+
+        function ocultarErro(elemento, mensagemErro) {
+            elemento.classList.remove('erro');
+            mensagemErro.style.display = 'none';
+        }
+
+        function validarEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email.toLowerCase());
+        }
+
+        function validarSenha(senha) {
+            const temTamanhoMinimo = senha.length >= 8;
+            const temMaiuscula = /[A-Z]/.test(senha);
+            const temMinuscula = /[a-z]/.test(senha);
+            const temNumero = /[0-9]/.test(senha);
+            const temSimbolo = /[^A-Za-z0-9]/.test(senha);
+
+            return temTamanhoMinimo && temMaiuscula && temMinuscula && temNumero && temSimbolo;
+        }
+
+        function limpa_formulario_cep() {
+            // Limpa valores do formulário de cep.
+            document.getElementById('rua').value = ("");
+            document.getElementById('bairro').value = ("");
+            document.getElementById('cidade').value = ("");
+            document.getElementById('uf').value = ("");
+        }
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                // Atualiza os campos com os valores.
+                document.getElementById('rua').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('uf').value = (conteudo.uf);
+            } else {
+                // CEP não Encontrado.
+                limpa_formulario_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+
+        function pesquisacep(valor) {
+            // Remove a formatação do CEP para a consulta API
+            var cep = valor.replace(/\D/g, '');
+
+            // Verifica se campo cep possui valor informado.
+            if (cep != "") {
+                // Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                // Valida o formato do CEP.
+                if (validacep.test(cep)) {
+                    // Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('rua').value = "...";
+                    document.getElementById('bairro').value = "...";
+                    document.getElementById('cidade').value = "...";
+                    document.getElementById('uf').value = "...";
+
+                    // Cria um elemento javascript.
+                    var script = document.createElement('script');
+
+                    // Sincroniza com o callback.
+                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                    // Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+                } else {
+                    // CEP é inválido.
+                    limpa_formulario_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } else {
+                // CEP sem valor, limpa formulário.
+                limpa_formulario_cep();
+            }
+        }
+
+        document.getElementById('cpf').addEventListener('input', function (e) {
+            let valor = e.target.value.replace(/\D/g, '');
+            if (valor.length > 11) valor = valor.substring(0, 11);
+
+            // Formata o CPF
+            if (valor.length > 0) {
+                valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+                valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+                valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            }
+
+            e.target.value = valor;
+
+            // Valida o CPF em tempo real
+            const cpfValido = validarCPF(valor);
+            const erroCpf = document.getElementById('erro-cpf');
+
+            if (cpfValido) {
+                ocultarErro(e.target, erroCpf);
+            } else {
+                mostrarErro(e.target, erroCpf);
+            }
+        });
+    </script>
+</body>
+
+</html>
